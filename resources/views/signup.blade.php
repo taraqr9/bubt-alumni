@@ -14,7 +14,7 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-up.html" />
 
-    <title>Sign Up | AdminKit Demo</title>
+    <title>Sign Up</title>
 
     <link href="css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -29,22 +29,15 @@
 
                     <div class="text-center mt-4">
                         <h1 class="h2">Get started</h1>
-                        <p class="lead">
-                            Start creating the best possible user experience for you customers.
-                        </p>
                     </div>
 
                     <div class="card">
                         <div class="card-body">
                             <div class="m-sm-4">
-                                <form>
+                                <form method="post" action="/signup">
                                     <div class="mb-3">
                                         <label class="form-label">Name</label>
                                         <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your name" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Company</label>
-                                        <input class="form-control form-control-lg" type="text" name="company" placeholder="Enter your company name" />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
@@ -55,8 +48,14 @@
                                         <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter password" />
                                     </div>
                                     <div class="text-center mt-3">
-                                        <a href="index.html" class="btn btn-lg btn-primary">Sign up</a>
-                                        <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
+                                        @csrf
+                                        <button type="submit" class="btn btn-lg btn-primary">Sign up</button>
+                                    </div>
+                                    <div class="d-block mt-4">
+                                        <label for="password" class="control-label">Already have account?</label>
+                                            <a href="login">
+                                                Login Here!
+                                            </a>
                                     </div>
                                 </form>
                             </div>

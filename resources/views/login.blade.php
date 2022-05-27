@@ -14,13 +14,14 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-in.html" />
 
-    <title>Sign In | AdminKit Demo</title>
+    <title>Sign In</title>
 
     <link href="css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <main class="d-flex w-100">
     <div class="container d-flex flex-column">
         <div class="row vh-100">
@@ -28,7 +29,7 @@
                 <div class="d-table-cell align-middle">
 
                     <div class="text-center mt-4">
-                        <h1 class="h2">Welcome back, Charles</h1>
+                        <h1 class="h2">Welcome back</h1>
                         <p class="lead">
                             Sign in to your account to continue
                         </p>
@@ -37,10 +38,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="m-sm-4">
-                                <div class="text-center">
-                                    <img src="img/avatars/avatar.jpg" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
-                                </div>
-                                <form>
+                                <form action="/login" method="post">
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
                                         <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
@@ -61,8 +59,16 @@
                                         </label>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <a href="index.html" class="btn btn-lg btn-primary">Sign in</a>
-                                        <!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
+                                        @csrf
+                                        <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+                                    </div>
+
+                                    <div class="d-block">
+                                        <div class="float-right">
+                                            <a href="signup" class="text-small">
+                                                Signup Here!
+                                            </a>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
