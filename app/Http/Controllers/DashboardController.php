@@ -18,7 +18,8 @@ class DashboardController extends Controller
         if($checkAdmin)
         {
             $users = $this->user->getAllUsers();
-            return view('dashboard')->with('users', $users);
+            return view('dashboard', compact('users'));
         }
+        return view('dashboard');
     }
 }

@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
     <meta name="author" content="AdminKit">
-    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <meta name="keywords"
+          content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+    <link rel="shortcut icon" href="img/icons/icon-48x48.png"/>
 
-    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-up.html" />
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-up.html"/>
 
     <title>Sign Up</title>
 
@@ -26,7 +27,16 @@
         <div class="row vh-100">
             <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
                 <div class="d-table-cell align-middle">
-
+                    <div class="text-center mt-4">
+                        <h1 class="h2">
+                            @if ($message = Session::get('message'))
+                                <div class="alert alert-danger alert-block">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @endif
+                        </h1>
+                    </div>
                     <div class="text-center mt-4">
                         <h1 class="h2">Get started</h1>
                     </div>
@@ -37,15 +47,18 @@
                                 <form method="post" action="/signup">
                                     <div class="mb-3">
                                         <label class="form-label">Name</label>
-                                        <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your name" />
+                                        <input class="form-control form-control-lg" type="text" name="name"
+                                               placeholder="Enter your name"/>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
-                                        <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
+                                        <input class="form-control form-control-lg" type="email" name="email"
+                                               placeholder="Enter your email"/>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
-                                        <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter password" />
+                                        <input class="form-control form-control-lg" type="password" name="password"
+                                               placeholder="Enter password"/>
                                     </div>
                                     <div class="text-center mt-3">
                                         @csrf
@@ -53,9 +66,9 @@
                                     </div>
                                     <div class="d-block mt-4">
                                         <label for="password" class="control-label">Already have account?</label>
-                                            <a href="login">
-                                                Login Here!
-                                            </a>
+                                        <a href="login">
+                                            Login Here!
+                                        </a>
                                     </div>
                                 </form>
                             </div>

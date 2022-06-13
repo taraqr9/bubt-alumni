@@ -203,12 +203,13 @@
 								<a class="dropdown-item" href="index.blade.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="{{route('logout')}}">Log out</a>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</nav>
+            @if(!$users->isEmpty()):
 
 			<main class="content">
 				<div class="container-fluid p-0">
@@ -238,14 +239,12 @@
                                             </th>
                                         </tr>
                                     @endforeach
-
-
-
 									</tbody>
 								</table>
 							</div>
 				</div>
 			</main>
+            @endif
 
 			<footer class="footer">
 				<div class="container-fluid">

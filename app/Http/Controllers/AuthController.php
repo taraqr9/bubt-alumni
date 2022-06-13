@@ -6,6 +6,7 @@ use App\Exceptions\ModelCreateException;
 use App\Models\User;
 use App\Services\AuthService;
 use App\Services\UserService;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -27,10 +28,10 @@ class AuthController extends Controller
      */
     public function loginPage(): Factory|View|Application
     {
-        if(Auth::user())
-        {
-            return view('dashboard');
-        }
+//        if(Auth::user())
+//        {
+//            return view('dashboard');
+//        }
 
         return view('login');
     }
@@ -38,13 +39,27 @@ class AuthController extends Controller
     /**
      * @param Request $request
      * @return RedirectResponse
-     * @throws ModelCreateException
      */
     public function register(Request $request): RedirectResponse
     {
-        $user = $this->auth->register($request);
-        auth()->login($user);
-        return redirect()->route('dashboard');
+        try{
+            $request->validate([
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required',
+            ]);
+
+            $user = $this->auth->register($request);
+            auth()->login($user);
+            return redirect()->route('dashboard')->with([
+                'status' => 'success',
+                'message' => 'User registered successfully!'
+            ]);
+        }catch(Exception $exception){
+            return redirect()->back()->with([
+                'status' => 'error',
+                'message' => $exception->getMessage() ?: 'Unable to register user!'
+            ]);
+        }
     }
 
     /**
@@ -56,6 +71,7 @@ class AuthController extends Controller
     {
         $user = $this->auth->login(... $request->only(['email', 'password']));
         auth()->login($user);
+
         return view('dashboard');
     }
 
@@ -66,7 +82,7 @@ class AuthController extends Controller
     {
         Auth::guard('auth')->logout();
 
-        return redirect()->route('login');
+        return redirect()->route('/login');
     }
 
 

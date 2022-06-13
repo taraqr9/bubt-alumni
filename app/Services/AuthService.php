@@ -24,10 +24,10 @@ class AuthService extends Service
     /**
      * @param Request $request
      * @return User
-     * @throws ModelCreateException
      */
     public function register(Request $request): User
     {
+
         $user = $this->user->create($request->only([
             'name',
             'email',
