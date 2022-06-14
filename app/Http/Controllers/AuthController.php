@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ModelCreateException;
+use App\Models\Information;
 use App\Models\User;
 use App\Services\AuthService;
 use App\Services\UserService;
@@ -28,11 +29,6 @@ class AuthController extends Controller
      */
     public function loginPage(): Factory|View|Application
     {
-//        if(Auth::user())
-//        {
-//            return view('dashboard');
-//        }
-
         return view('login');
     }
 
@@ -44,20 +40,32 @@ class AuthController extends Controller
     {
         try{
             $request->validate([
+                'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
+                'mobile' => 'required|integer',
+                'intake' => 'required|integer',
+                'shift' => 'required',
+                'reference' => 'required|email|exists:users,email',
             ]);
 
             $user = $this->auth->register($request);
+            $information = $this->user->create($request->only([
+                'reference',
+                'intake',
+                'shift',
+                'passing_year',
+                'university_id',
+                'current_job_designation',
+                'current_company'
+            ]));
             auth()->login($user);
             return redirect()->route('dashboard')->with([
-                'status' => 'success',
-                'message' => 'User registered successfully!'
+                'success' => 'User registered successfully!'
             ]);
         }catch(Exception $exception){
             return redirect()->back()->with([
-                'status' => 'error',
-                'message' => $exception->getMessage() ?: 'Unable to register user!'
+                'error' => $exception->getMessage() ?: 'Unable to register user!'
             ]);
         }
     }
@@ -80,9 +88,19 @@ class AuthController extends Controller
      */
     public function logout(): RedirectResponse
     {
-        Auth::guard('auth')->logout();
+        Auth::logout();
 
-        return redirect()->route('/login');
+        return redirect()->route('login');
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function profile(): View|Factory|Application
+    {
+        $user = Auth::user();
+
+        return view('profile', compact('user'));
     }
 
 

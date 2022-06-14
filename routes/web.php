@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Route;
 
 
@@ -13,8 +15,9 @@ Route::view('/signup', 'signup')->name('signup');
 Route::post('/signup', [AuthController::class, 'register']);
 
 Route::middleware('auth')->group(function(){
-//    Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::get('/user/{email}/profile', [UserController::class, 'getUserProfile'])->name('user.profile');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

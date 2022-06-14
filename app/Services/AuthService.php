@@ -28,15 +28,12 @@ class AuthService extends Service
     public function register(Request $request): User
     {
 
-        $user = $this->user->create($request->only([
+        return $this->user->create($request->only([
             'name',
             'email',
             'password',
-            'provider',
-            'avatar'
+            'mobile'
         ]));
-
-        return $user;
     }
 
     /**
