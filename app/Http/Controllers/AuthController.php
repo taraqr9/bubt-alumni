@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ModelCreateException;
-use App\Models\Information;
-use App\Models\User;
 use App\Services\AuthService;
 use App\Services\UserService;
 use Exception;
@@ -14,7 +12,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -38,28 +35,26 @@ class AuthController extends Controller
      */
     public function register(Request $request): RedirectResponse
     {
+
+
         try{
-            $request->validate([
+            $data = $request->validate([
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
                 'mobile' => 'required|integer',
                 'intake' => 'required|integer',
                 'shift' => 'required',
+                'university_id' => 'nullable',
+                'passing_year' => 'nullable|date',
+                'current_job_designation' => 'nullable|string',
+                'current_company' => 'nullable|string',
+                'lives' => 'nullable|string',
                 'reference' => 'required|email|exists:users,email',
             ]);
 
-            $user = $this->auth->register($request);
-            $information = $this->user->create($request->only([
-                'reference',
-                'intake',
-                'shift',
-                'passing_year',
-                'university_id',
-                'current_job_designation',
-                'current_company'
-            ]));
-            auth()->login($user);
+            $user = $this->user->createUserWithInformation($data);
+            auth()->login($user, true);
             return redirect()->route('dashboard')->with([
                 'success' => 'User registered successfully!'
             ]);

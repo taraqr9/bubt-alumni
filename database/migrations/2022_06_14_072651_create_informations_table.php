@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('reference');
             $table->tinyInteger('intake');
             $table->tinyInteger('shift');
-            $table->dateTime('passing_year');
-            $table->string('university_id');
-            $table->string('current_job_designation');
-            $table->string('current_company');
-            $table->string('lives');
+            $table->dateTime('passing_year')->nullable();
+            $table->string('university_id')->nullable();
+            $table->string('current_job_designation')->nullable();
+            $table->string('current_company')->nullable();
+            $table->string('lives')->nullable();
             $table->timestamps();
         });
     }

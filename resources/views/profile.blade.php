@@ -18,14 +18,15 @@
                     <div class="col-lg-4">
                         <div class="card mb-4">
                             <div class="card-body text-center">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                     alt="avatar"
                                      class="rounded-circle img-fluid" style="width: 150px;">
                                 <h5 class="my-3">{{$user?->name}}</h5>
                                 <p class="text-muted mb-4">{{$user?->address}}</p>
-{{--                                <div class="d-flex justify-content-center mb-2">--}}
-{{--                                    <button type="button" class="btn btn-primary">Follow</button>--}}
-{{--                                    <button type="button" class="btn btn-outline-primary ms-1">Message</button>--}}
-{{--                                </div>--}}
+                                {{--                                <div class="d-flex justify-content-center mb-2">--}}
+                                {{--                                    <button type="button" class="btn btn-primary">Follow</button>--}}
+                                {{--                                    <button type="button" class="btn btn-outline-primary ms-1">Message</button>--}}
+                                {{--                                </div>--}}
                             </div>
                         </div>
                         <div class="card mb-4 mb-lg-0">
@@ -84,7 +85,7 @@
                                         <p class="mb-0">Phone</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">{{$user?->phone}}</p>
+                                        <p class="text-muted mb-0">{{$user?->mobile}}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -93,74 +94,78 @@
                                         <p class="mb-0">Address</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">{{$user?->address}}</p>
+                                        <p class="text-muted mb-0">{{$user?->information?->lives}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body">
-                                        <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                                        </p>
-                                        <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                        <div class="progress rounded" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                        <div>
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body">
+                                    <p class="mb-4"><span class="text-primary font-weight-bold me-1">Information</span>
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Reference</p>
                                         </div>
-                                        <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                        <div class="progress rounded" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                        <div class="progress rounded" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                        <div class="progress rounded" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                        <div class="progress rounded mb-2" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">{{$user?->information?->reference}}</p>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body">
-                                        <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                                        </p>
-                                        <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                        <div class="progress rounded" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Intake</p>
                                         </div>
-                                        <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                        <div class="progress rounded" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">{{$user?->information?->intake}}</p>
                                         </div>
-                                        <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                        <div class="progress rounded" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Shift</p>
                                         </div>
-                                        <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                        <div class="progress rounded" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">{{\App\Enums\UserShift::from($user?->information?->shift)->name}}</p>
                                         </div>
-                                        <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                        <div class="progress rounded mb-2" style="height: 5px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Passing Year</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">{{
+                                                    Carbon\Carbon::parse($user?->information?->passing_year)->isoFormat('MMM Do YYYY')
+                                            }}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">University ID</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">{{$user?->information?->university_id}}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Current Job Designation</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">{{$user?->information?->current_job_designation}}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Current Company</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">{{$user?->information?->current_company}}</p>
                                         </div>
                                     </div>
                                 </div>

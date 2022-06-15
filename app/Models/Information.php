@@ -10,7 +10,6 @@ class Information extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'reference',
         'intake',
         'shift',
@@ -18,5 +17,6 @@ class Information extends Model
         'university_id',
         'current_job_designation',
         'current_company',
+        'lives',
     ];
 }

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Exceptions\ModelCreateException;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService extends Service
@@ -19,21 +18,6 @@ class AuthService extends Service
     public function find($id): User
     {
         return User::find($id)->get();
-    }
-
-    /**
-     * @param Request $request
-     * @return User
-     */
-    public function register(Request $request): User
-    {
-
-        return $this->user->create($request->only([
-            'name',
-            'email',
-            'password',
-            'mobile'
-        ]));
     }
 
     /**

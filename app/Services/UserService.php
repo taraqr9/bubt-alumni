@@ -3,8 +3,13 @@
 namespace App\Services;
 
 use App\Exceptions\ModelCreateException;
+use App\Models\Information;
 use App\Models\User;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class UserService extends Service
 {
@@ -40,7 +45,12 @@ class UserService extends Service
      */
     public function create(array $data): User
     {
-        return User::create($data);
+        return User::create(Arr::only($data, [
+            'name',
+            'email',
+            'password',
+            'mobile',
+            ]));
     }
 
     /**
@@ -49,5 +59,38 @@ class UserService extends Service
     public function getAllUsers(): mixed
     {
         return User::where('admin', 0)->get();
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     * @throws Exception
+     */
+    public function createUserWithInformation($data): User
+    {
+        try {
+            DB::beginTransaction();
+
+            $user = $this->create($data);
+
+            $user->information()->create(Arr::only($data,[
+                'reference',
+                'intake',
+                'shift',
+                'passing_year',
+                'university_id',
+                'current_job_designation',
+                'current_company',
+                'lives'
+            ]));
+
+            DB::commit();
+
+            return $user;
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw $exception;
+        }
     }
 }

@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Passing Year</label>
-                                        <input class="form-control form-control-lg"  type="month" name="passing_year"
+                                        <input class="form-control form-control-lg"  type="date" name="passing_year"
                                                placeholder="Enter your passing year"/>
                                     </div>
                                     <div class="mb-3">
@@ -81,8 +81,14 @@
                                                placeholder="Enter your current company"/>
                                     </div>
                                     <div class="mb-3">
+                                        <label class="form-label">Lives</label>
+                                        <input class="form-control form-control-lg" type="text" name="lives"
+                                               placeholder="Enter your living place"/>
+                                    </div>
+                                    <div class="mb-3">
                                         <label class="form-label">Reference Email</label>
-                                        <input class="form-control form-control-lg" type="email" required name="reference"
+                                        <input class="form-control form-control-lg" type="email" required
+                                               name="reference"
                                                placeholder="Enter your current company"/>
                                     </div>
                                     <div class="text-center mt-3">
