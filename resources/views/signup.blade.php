@@ -61,31 +61,6 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">University ID</label>
-                                        <input class="form-control form-control-lg" type="number" name="university_id"
-                                               placeholder="Enter your university ID"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Passing Year</label>
-                                        <input class="form-control form-control-lg"  type="date" name="passing_year"
-                                               placeholder="Enter your passing year"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Current Job Designation</label>
-                                        <input class="form-control form-control-lg"  type="text" name="current_job_designation"
-                                               placeholder="Enter current job designation"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Current Company</label>
-                                        <input class="form-control form-control-lg" type="text" name="current_company"
-                                               placeholder="Enter your current company"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Lives</label>
-                                        <input class="form-control form-control-lg" type="text" name="lives"
-                                               placeholder="Enter your living place"/>
-                                    </div>
-                                    <div class="mb-3">
                                         <label class="form-label">Reference Email</label>
                                         <input class="form-control form-control-lg" type="email" required
                                                name="reference"

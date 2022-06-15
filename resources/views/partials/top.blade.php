@@ -76,7 +76,7 @@
                 </a>
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                    <img src="../../img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" /> <span class="text-dark">{{ Auth::user()->name }}</span>
+                    <img src="../../img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" /> <span class="text-dark">{{ Auth::user()?->name ? Auth::user()->name : 'Guest' }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="profile"><i class="align-middle me-1" data-feather="user"></i> Profile</a>

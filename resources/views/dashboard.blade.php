@@ -23,27 +23,49 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th class="d-none d-xl-table-cell">Email</th>
-                            <th class="d-none d-xl-table-cell">Join At</th>
+                            <th class="d-none d-xl-table-cell">Phone</th>
+                            <th class="d-none d-xl-table-cell">Referred By</th>
                             <th></th>
-                            <th></th>
+{{--                            <th></th>--}}
 
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach(\App\Models\User::where('admin',0)->get() as $user)
+                        @foreach($users as $user)
                             <tr>
                                 <td>{{$user->name}}</td>
-                                <td class="d-none d-xl-table-cell">{{$user->email}}</td>
-                                <td class="d-none d-xl-table-cell">{{$user->created_at}}</td>
-                                <td><a href="{{route('user.profile', $user->email)}}"><button class="btn btn-success">View</button></a></td>
+                                <td class="d-none d-xl-table-cell">{{$user->mobile}}</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <a href="/user/{{App\Models\User::where('email', $user->information->reference)->get()->first()->id}}/profile">
+                                        {{App\Models\User::where('email', $user->information->reference)->get()->first()->name}}
+                                    </a>
+                                </td>
+{{--                                <td>--}}
+{{--                                    <a href="{{route('guest.profile', $user->id)}}"><button class="btn btn-success">View</button></a>--}}
+{{--                                </td>--}}
                                 <th class="d-none d-md-table-cell">
-                                    <button class="btn btn-success">Success</button>
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/user/{{$user->id}}/profile">
+                                                View
+                                            </a>
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="#">Approve</a>
+                                            <a class="dropdown-item" href="#">Decline</a>
+                                        </div>
+                                    </div>
                                 </th>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+
+                    <div class="ml-auto mt-3 p-3">
+                        {{ $users->links() }}
+                    </div>
                 </div>
             </div>
         </main>

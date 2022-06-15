@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserService;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class DashboardController extends Controller
 {
@@ -11,15 +13,15 @@ class DashboardController extends Controller
         protected UserService $user,
     )
     {}
-    public function index()
-    {
-        $checkAdmin = Auth::user()->admin;
 
-        if($checkAdmin)
-        {
-            $users = $this->user->getAllUsers();
-            return view('dashboard', compact('users'));
-        }
-        return view('dashboard');
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function index(): View|Factory|Application
+    {
+        $users = $this->user->adminGetAllUser();
+
+        return view('dashboard', compact('users'));
     }
 }

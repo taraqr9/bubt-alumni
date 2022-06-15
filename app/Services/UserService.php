@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserService extends Service
@@ -58,7 +59,7 @@ class UserService extends Service
      */
     public function getAllUsers(): mixed
     {
-        return User::where('admin', 0)->get();
+        return User::where('admin', 0)->paginate(20);
     }
 
     /**
@@ -77,11 +78,6 @@ class UserService extends Service
                 'reference',
                 'intake',
                 'shift',
-                'passing_year',
-                'university_id',
-                'current_job_designation',
-                'current_company',
-                'lives'
             ]));
 
             DB::commit();
@@ -92,5 +88,20 @@ class UserService extends Service
 
             throw $exception;
         }
+    }
+
+    public function checkAdmin()
+    {
+        return Auth::user()->admin;
+    }
+
+    public function adminGetAllUser()
+    {
+        if($this->checkAdmin())
+        {
+            return $this->getAllUsers();
+        }
+
+        return null;
     }
 }

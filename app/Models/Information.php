@@ -19,4 +19,9 @@ class Information extends Model
         'current_company',
         'lives',
     ];
+
+    public function User()
+    {
+        return $this->hasOne(User::class);
+    }
 }

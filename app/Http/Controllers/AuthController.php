@@ -31,9 +31,9 @@ class AuthController extends Controller
 
     /**
      * @param Request $request
-     * @return RedirectResponse
+     * @return View|RedirectResponse
      */
-    public function register(Request $request): RedirectResponse
+    public function register(Request $request): view|RedirectResponse
     {
 
 
@@ -45,17 +45,14 @@ class AuthController extends Controller
                 'mobile' => 'required|integer',
                 'intake' => 'required|integer',
                 'shift' => 'required',
-                'university_id' => 'nullable',
-                'passing_year' => 'nullable|date',
-                'current_job_designation' => 'nullable|string',
-                'current_company' => 'nullable|string',
-                'lives' => 'nullable|string',
                 'reference' => 'required|email|exists:users,email',
             ]);
 
             $user = $this->user->createUserWithInformation($data);
             auth()->login($user, true);
-            return redirect()->route('dashboard')->with([
+            $users = $this->user->adminGetAllUser();
+
+            return view('dashboard', compact('users'))->with([
                 'success' => 'User registered successfully!'
             ]);
         }catch(Exception $exception){
@@ -75,7 +72,10 @@ class AuthController extends Controller
         $user = $this->auth->login(... $request->only(['email', 'password']));
         auth()->login($user);
 
-        return view('dashboard');
+        $users = $this->user->adminGetAllUser();
+
+
+        return view('dashboard', compact('users'));
     }
 
     /**
@@ -89,13 +89,28 @@ class AuthController extends Controller
     }
 
     /**
-     * @return Application|Factory|View
+     * @return View|Factory|Application
+     * @throws ModelCreateException
      */
     public function profile(): View|Factory|Application
     {
         $user = Auth::user();
+        $reference = $this->user->findWithEmail($user->information->reference);
 
-        return view('profile', compact('user'));
+        return view('user.profile', compact(['user', 'reference']));
+    }
+
+    /**
+     * @param $id
+     * @return Application|Factory|View
+     * @throws ModelCreateException
+     */
+    public function guestProfile($id): View|Factory|Application
+    {
+        $user = $this->user->find($id);
+        $reference = $this->user->findWithEmail($user->information->reference);
+
+        return view('guest.profile', compact(['user', 'reference']));
     }
 
 
