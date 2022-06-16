@@ -24,6 +24,9 @@ return new class extends Migration
             $table->string('current_job_designation')->nullable();
             $table->string('current_company')->nullable();
             $table->string('lives')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
             $table->timestamps();
         });
     }

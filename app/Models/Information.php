@@ -18,6 +18,9 @@ class Information extends Model
         'current_job_designation',
         'current_company',
         'lives',
+        'facebook',
+        'linkedin',
+        'github',
     ];
 
     public function User()

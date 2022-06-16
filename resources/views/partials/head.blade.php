@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 <meta name="author" content="AdminKit">
-<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+<meta name="keywords" content="bubtalmuni, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="shortcut icon" href="../../img/icons/icon-48x48.png" />
@@ -16,3 +16,19 @@
 
 <link href="../../css/app.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.css"
+    rel="stylesheet"
+/>

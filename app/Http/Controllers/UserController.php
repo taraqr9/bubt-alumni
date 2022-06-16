@@ -23,15 +23,71 @@ class UserController extends Controller
     {}
 
     /**
-     * @param $email
-     * @return Factory|View|Application
-     * @throws ModelCreateException
+     * @param $id
+     * @param $status
+     * @return RedirectResponse|void
      */
-    public function getUserProfile($email): Factory|View|Application
+    public function changeStatus($id, $status)
     {
-        $user = $this->user->findWithEmail($email);
-        return view('user.profile', compact('user'));
+        $user = $this->user->find($id);
+
+        if($status == 0 || $status == 1 || $status == 2)
+        {
+            $user['status'] = $status;
+            $user->update((array)$user);
+
+            return redirect()->back()->with([
+                'success' => 'Status updated successfully!'
+            ]);
+        }
     }
 
+    public function edit($id)
+    {
+        $user = $this->user->find($id);
+
+        if(!Auth::id() == $user->id && !Auth::user()->admin == 1)
+        {
+            return redirect()->back()->with([
+                'error' => 'Your not authorized for this action!'
+            ]);
+        }
+        return \view('user.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'mobile' => 'required|integer',
+            'intake' => 'required|integer',
+            'shift' => 'required',
+            'lives' => 'nullable|string',
+            'passing_year' => 'nullable',
+            'university_id' => 'nullable',
+            'current_job_designation' => 'nullable|string',
+            'current_company' => 'nullable|string',
+            'facebook' => 'nullable|url',
+            'linkedin' => 'nullable|url',
+            'github' => 'nullable|url',
+        ]);
+
+        $user = $this->user->find($id);
+
+        if(!Auth::id() == $user->id && !Auth::user()->admin == 1)
+        {
+            return redirect()->back()->with([
+                'error' => 'Your not authorized for this action!'
+            ]);
+        }
+
+        $this->user->updateUser($user, $data);
+        $this->user->updateInformation($user, $data);
+
+        return redirect()->back()->with([
+            'success' => 'Profile updated successfully!'
+        ]);
+    }
 
 }

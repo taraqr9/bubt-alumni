@@ -20,8 +20,10 @@ Route::middleware('auth')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::get('/user/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::post('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
-    Route::get('/user/{email}/profile', [UserController::class, 'getUserProfile'])->name('user.profile');
+    Route::get('user/{id}/{status}', [UserController::class, 'changeStatus'])->name('user.status');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

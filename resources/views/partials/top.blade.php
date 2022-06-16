@@ -79,7 +79,7 @@
                     <img src="../../img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" /> <span class="text-dark">{{ Auth::user()?->name ? Auth::user()->name : 'Guest' }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="profile"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                    <a class="dropdown-item" href="{{route('profile')}}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
                     <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{route('logout')}}">Log out</a>

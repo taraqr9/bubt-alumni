@@ -25,7 +25,7 @@
                             <div class="m-sm-4">
                                 <form method="post" action="/signup">
                                     <div class="mb-3">
-                                        <label class="form-label">Name</label>
+                                        <label class="form-label">Full Name</label>
                                         <input class="form-control form-control-lg" required type="text" name="name"
                                                placeholder="Enter your name"/>
                                     </div>

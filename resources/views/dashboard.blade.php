@@ -25,9 +25,8 @@
                             <th>Name</th>
                             <th class="d-none d-xl-table-cell">Phone</th>
                             <th class="d-none d-xl-table-cell">Referred By</th>
+                            <th class="d-none d-xl-table-cell">Status</th>
                             <th></th>
-{{--                            <th></th>--}}
-
                         </tr>
                         </thead>
                         <tbody>
@@ -40,9 +39,7 @@
                                         {{App\Models\User::where('email', $user->information->reference)->get()->first()->name}}
                                     </a>
                                 </td>
-{{--                                <td>--}}
-{{--                                    <a href="{{route('guest.profile', $user->id)}}"><button class="btn btn-success">View</button></a>--}}
-{{--                                </td>--}}
+                                <td class="d-none d-xl-table-cell"><span class="btn btn-success">{{\App\Enums\UserStatus::from($user?->status)->name}}</span></td>
                                 <th class="d-none d-md-table-cell">
                                     <div class="dropdown">
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,8 +50,8 @@
                                                 View
                                             </a>
                                             <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item" href="#">Approve</a>
-                                            <a class="dropdown-item" href="#">Decline</a>
+                                            <a class="dropdown-item" href="{{route('user.status',['id'=>$user->id, 'status'=>1])}}">Approve</a>
+                                            <a class="dropdown-item" href="{{route('user.status',['id'=>$user->id, 'status'=>2])}}">Decline</a>
                                         </div>
                                     </div>
                                 </th>

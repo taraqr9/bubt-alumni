@@ -51,6 +51,7 @@ class UserService extends Service
             'email',
             'password',
             'mobile',
+            'status'
             ]));
     }
 
@@ -59,7 +60,7 @@ class UserService extends Service
      */
     public function getAllUsers(): mixed
     {
-        return User::where('admin', 0)->paginate(20);
+        return User::where('admin', 0)->orderBy('status')->paginate(20);
     }
 
     /**
@@ -104,4 +105,40 @@ class UserService extends Service
 
         return null;
     }
+
+    /**
+     * @param User $user
+     * @param $data
+     * @return bool
+     */
+    public function updateUser(User $user, $data): bool
+    {
+        return $user->update(Arr::only($data,[
+            'name',
+            'email',
+            'mobile',
+        ]));
+    }
+
+    /**
+     * @param User $user
+     * @param $data
+     * @return int
+     */
+    public function updateInformation(User $user, $data): int
+    {
+        return $user->information()->update(Arr::only($data,[
+            'intake',
+            'shift',
+            'passing_year',
+            'university_id',
+            'current_job_designation',
+            'current_company',
+            'lives',
+            'facebook',
+            'linkedin',
+            'github',
+        ]));
+    }
+
 }

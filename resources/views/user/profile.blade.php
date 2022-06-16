@@ -25,38 +25,47 @@
                                 <p class="text-muted mb-4">{{$user?->address}}</p>
                             </div>
                         </div>
+
                         <div class="card mb-4 mb-lg-0">
                             <div class="card-body p-0">
-                                <ul class="list-group list-group-flush rounded-3">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fas fa-globe fa-lg text-warning"></i>
-                                        <p class="mb-0">https://mdbootstrap.com</p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                                        <p class="mb-0">mdbootstrap</p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                        <p class="mb-0">@mdbootstrap</p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                        <p class="mb-0">mdbootstrap</p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                                        <p class="mb-0">mdbootstrap</p>
-                                    </li>
-                                </ul>
+                                @if(!blank($user->information->facebook) || !blank($user->information->linkedin) || !blank($user->information->github))
+                                    <ul class="list-group list-group-flush rounded-3 p-3 mb-2">
+                                        @if(!blank($user->information->facebook))
+                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                                                <p class="mb-0 ml-3 mr-auto">
+                                                    <a href="{{$user?->information?->facebook}}">{{$user?->information?->facebook}}</a>
+                                                </p>
+                                            </li>
+                                        @endif
+                                        @if(!blank($user->information->linkedin))
+                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                                <i class="fab fa-linkedin-in fa-lg" style="color: #55acee;"></i>
+                                                <p class="mb-0 ml-3 mr-auto">
+                                                    <a href="{{$user?->information?->linkedin}}">{{$user?->information?->linkedin}}</a>
+                                                </p>
+                                            </li>
+                                        @endif
+                                        @if(!blank($user->information->github))
+                                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                                <i class="fab fa-github fa-lg" style="color: #ac2bac;"></i>
+                                                <p class="mb-0 ml-3 mr-auto">
+                                                    <a href="{{$user?->information?->github}}">{{$user?->information?->github}}</a>
+                                                </p>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                @endif
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-8">
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="d-flex p-3">
-                                    <button type="button" class="btn btn-primary ml-auto p-2">Edit</button>
+                                    <a href="{{route("user.edit", ['id' => Auth::user()->id])}}"
+                                       class="btn btn-primary ml-auto p-2">Edit</a>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -78,7 +87,7 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <p class="mb-0">Phone</p>
+                                        <p class="mb-0">Mobile</p>
                                     </div>
                                     <div class="col-sm-9">
                                         <p class="text-muted mb-0">{{$user?->mobile}}</p>
@@ -105,7 +114,11 @@
                                             <p class="mb-0">Reference</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{$user?->information?->reference}}</p>
+                                            <p class="text-muted mb-0">
+                                                <a href="/user/{{App\Models\User::where('email', $user->information->reference)->get()->first()->id}}/profile">
+                                                    {{App\Models\User::where('email', $user->information->reference)->get()->first()->name}}
+                                                </a>
+                                            </p>
                                         </div>
                                     </div>
                                     <hr>
@@ -133,7 +146,7 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <p class="text-muted mb-0">{{
-                                                    Carbon\Carbon::parse($user?->information?->passing_year)->isoFormat('MMM Do YYYY')
+                                                    $user?->information?->passing_year
                                             }}</p>
                                         </div>
                                     </div>
@@ -162,6 +175,15 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <p class="text-muted mb-0">{{$user?->information?->current_company}}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Status</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="mb-0 btn btn-info">{{\App\Enums\UserStatus::from($user?->status)->name}}</p>
                                         </div>
                                     </div>
                                 </div>

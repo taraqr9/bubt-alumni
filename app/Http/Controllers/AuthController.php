@@ -48,6 +48,8 @@ class AuthController extends Controller
                 'reference' => 'required|email|exists:users,email',
             ]);
 
+            $data['status'] = 0;
+
             $user = $this->user->createUserWithInformation($data);
             auth()->login($user, true);
             $users = $this->user->adminGetAllUser();
@@ -108,6 +110,13 @@ class AuthController extends Controller
     public function guestProfile($id): View|Factory|Application
     {
         $user = $this->user->find($id);
+
+        if(blank($user))
+        {
+            return view('guest.profile')->with([
+                'error' => 'No user found here!'
+            ]);
+        }
         $reference = $this->user->findWithEmail($user->information->reference);
 
         return view('guest.profile', compact(['user', 'reference']));
