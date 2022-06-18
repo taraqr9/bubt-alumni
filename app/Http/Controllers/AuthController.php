@@ -71,7 +71,8 @@ class AuthController extends Controller
      */
     public function login(Request $request): View|Factory|Application
     {
-        $user = $this->auth->login(... $request->only(['email', 'password']));
+        $user = $this->auth->login($request);
+
         auth()->login($user);
 
         $users = $this->user->adminGetAllUser();

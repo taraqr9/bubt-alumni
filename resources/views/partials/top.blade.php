@@ -76,7 +76,7 @@
                 </a>
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                    <img src="../../img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" /> <span class="text-dark">{{ Auth::user()?->name ? Auth::user()->name : 'Guest' }}</span>
+                    <img src="{{auth()?->user()?->avatar ? auth()?->user()?->avatar : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}}" class="avatar img-fluid rounded me-1" /> <span class="text-dark">{{ Auth::user()?->name ? Auth::user()->name : 'Guest' }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="{{route('profile')}}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>

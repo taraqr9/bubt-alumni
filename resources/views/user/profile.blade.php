@@ -18,9 +18,9 @@
                     <div class="col-lg-4">
                         <div class="card mb-4">
                             <div class="card-body text-center">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                <img src="{{$user?->avatar ? $user->avatar : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}}"
                                      alt="avatar"
-                                     class="rounded-circle img-fluid" style="width: 150px;">
+                                     class="rounded-circle img-fluid" style="width: 180px; height: 180px">
                                 <h5 class="my-3">{{$user?->name}}</h5>
                                 <p class="text-muted mb-4">{{$user?->address}}</p>
                             </div>

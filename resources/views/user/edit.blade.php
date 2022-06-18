@@ -14,15 +14,17 @@
 
         <section style="background-color: #eee;">
             <div class="container py-5">
-                <form method="post" action="{{route("user.update", ['id'=>Auth::id()])}}">
+                <form method="post" action="{{route("user.update", ['id'=>$user?->id])}}" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="card mb-4">
                                 <div class="card-body text-center">
                                     <img
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                        src=" {{$user?->avatar ? $user->avatar : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}}
+                                        "
                                         alt="avatar"
-                                        class="rounded-circle img-fluid" style="width: 150px;">
+                                        class="rounded-circle img-fluid" style="width: 150px; height: 150px">
+                                    <input type="file" name="avatar" class="m-auto" >
                                 </div>
                             </div>
 
@@ -119,7 +121,8 @@
                                             <div class="col-sm-6 mr-auto">
                                                 <input class="text-muted mb-0 form-control form-control-lg" required
                                                        type="text" name="reference" readonly
-                                                       value="{{App\Models\User::where('email', $user?->information?->reference)->get()->first()->name}}"
+                                                       value="{{$user?->reference}}"
+                                                       placeholder="{{App\Models\User::where('email', $user?->information?->reference)->get()->first()->name}}"
                                                 />
                                             </div>
                                         </div>
@@ -169,7 +172,7 @@
                                                 <p class="mb-0">University ID</p>
                                             </div>
                                             <div class="col-sm-6 mr-auto">
-                                                <input class="text-muted mb-0 form-control form-control-lg" required
+                                                <input class="text-muted mb-0 form-control form-control-lg"
                                                        type="text" name="university_id"
                                                        value="{{$user?->information?->university_id}}"
                                                 />
@@ -181,7 +184,7 @@
                                                 <p class="mb-0">Current Job Designation</p>
                                             </div>
                                             <div class="col-sm-6 mr-auto">
-                                                <input class="text-muted mb-0 form-control form-control-lg" required
+                                                <input class="text-muted mb-0 form-control form-control-lg"
                                                        type="text" name="current_job_designation"
                                                        value="{{$user?->information?->current_job_designation}}"
                                                 />
@@ -193,7 +196,7 @@
                                                 <p class="mb-0">Current Company</p>
                                             </div>
                                             <div class="col-sm-6 mr-auto">
-                                                <input class="text-muted mb-0 form-control form-control-lg" required
+                                                <input class="text-muted mb-0 form-control form-control-lg"
                                                        type="text" name="current_company"
                                                        value="{{$user?->information?->current_company}}"
                                                 />

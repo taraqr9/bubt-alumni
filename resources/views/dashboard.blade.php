@@ -22,7 +22,7 @@
                     <table class="table table-hover my-0">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th class="d-none d-xl-table-cell">Name</th>
                             <th class="d-none d-xl-table-cell">Phone</th>
                             <th class="d-none d-xl-table-cell">Referred By</th>
                             <th class="d-none d-xl-table-cell">Status</th>
@@ -32,14 +32,22 @@
                         <tbody>
                         @foreach($users as $user)
                             <tr>
-                                <td>{{$user->name}}</td>
+                                <td class="d-none d-xl-table-cell">{{$user->name}}</td>
                                 <td class="d-none d-xl-table-cell">{{$user->mobile}}</td>
                                 <td class="d-none d-xl-table-cell">
                                     <a href="/user/{{App\Models\User::where('email', $user->information->reference)->get()->first()->id}}/profile">
                                         {{App\Models\User::where('email', $user->information->reference)->get()->first()->name}}
                                     </a>
                                 </td>
-                                <td class="d-none d-xl-table-cell"><span class="btn btn-success">{{\App\Enums\UserStatus::from($user?->status)->name}}</span></td>
+                                <td class="d-none d-xl-table-cell"><span class="
+                                @if($user->status == 0)
+                                    {{ 'btn btn-info' }}
+                                @elseif($user->status == 1)
+                                    {{ 'btn btn-success' }}
+                                @elseif($user->status == 2)
+                                    {{ 'btn btn-warning' }}
+                                @endif">
+                                        {{\App\Enums\UserStatus::from($user?->status)->name}}</span></td>
                                 <th class="d-none d-md-table-cell">
                                     <div class="dropdown">
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,7 +57,7 @@
                                             <a class="dropdown-item" href="/user/{{$user->id}}/profile">
                                                 View
                                             </a>
-                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="{{route("user.edit", ['id' => $user->id])}}">Edit</a>
                                             <a class="dropdown-item" href="{{route('user.status',['id'=>$user->id, 'status'=>1])}}">Approve</a>
                                             <a class="dropdown-item" href="{{route('user.status',['id'=>$user->id, 'status'=>2])}}">Decline</a>
                                         </div>
@@ -73,6 +81,11 @@
 	</div>
 
 	@include('partials.scripts')
+
+    <script>
+        const status = document.getElementById('status');
+        console.log(status);
+    </script>
 </body>
 
 </html>

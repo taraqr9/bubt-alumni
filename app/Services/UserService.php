@@ -3,9 +3,7 @@
 namespace App\Services;
 
 use App\Exceptions\ModelCreateException;
-use App\Models\Information;
 use App\Models\User;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
@@ -117,6 +115,7 @@ class UserService extends Service
             'name',
             'email',
             'mobile',
+            'avatar'
         ]));
     }
 

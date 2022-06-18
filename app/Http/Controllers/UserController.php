@@ -2,23 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ModelCreateException;
-use App\Models\User;
-use App\Services\AuthService;
+use App\Services\MediaService;
 use App\Services\UserService;
-use Exception;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
     public function __construct(
         protected UserService $user,
+        protected MediaService $media,
     )
     {}
 
@@ -59,8 +53,9 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required',
             'mobile' => 'required|integer',
+            'avatar' => 'nullable|image',
             'intake' => 'required|integer',
             'shift' => 'required',
             'lives' => 'nullable|string',
@@ -74,6 +69,7 @@ class UserController extends Controller
         ]);
 
         $user = $this->user->find($id);
+//        dd($user);
 
         if(!Auth::id() == $user->id && !Auth::user()->admin == 1)
         {
@@ -81,6 +77,12 @@ class UserController extends Controller
                 'error' => 'Your not authorized for this action!'
             ]);
         }
+
+        if($request?->avatar)
+        {
+            $data['avatar'] = $this->media->uploadImage($request->file('avatar'));
+        }
+
 
         $this->user->updateUser($user, $data);
         $this->user->updateInformation($user, $data);

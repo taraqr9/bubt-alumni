@@ -18,7 +18,7 @@
                     <div class="col-lg-4">
                         <div class="card mb-4">
                             <div class="card-body text-center">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                <img src="{{$user?->avatar ? $user->avatar : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}}"
                                      alt="avatar"
                                      class="rounded-circle img-fluid" style="width: 150px;">
                                 <h5 class="my-3">{{$user?->name}}</h5>
@@ -63,7 +63,7 @@
                             <div class="card-body">
                                 @if(Auth::user()->admin == 1)
                                     <div class="d-flex p-3">
-                                        <a href="{{route("user.edit", ['id' => Auth::user()->id])}}"
+                                        <a href="{{route("user.edit", ['id' => $user?->id])}}"
                                            class="btn btn-primary ml-auto p-2">Edit</a>
                                     </div>
                                 @endif

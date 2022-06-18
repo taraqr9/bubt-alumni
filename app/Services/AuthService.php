@@ -21,16 +21,15 @@ class AuthService extends Service
     }
 
     /**
-     * @param string $email
-     * @param string $password
+     * @param $data
      * @return User|null
-     * @throws ModelCreateException
+     * @throws ModelCreateException]
      */
-    public function login(string $email, string $password): ?User
+    public function login($data): User|null
     {
-        $user = $this->user->findWithEmail($email);
+        $user = $this->user->findWithEmail($data['email']);
 
-        if (!Hash::check($password, $user->password)) return null;
+        if (!Hash::check($data['password'], $user->password)) return null;
 
         return $user;
     }

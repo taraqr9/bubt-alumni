@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class InformationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +19,14 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => '$2y$10$QrbpNdoDgAOqyd32WBHNA.KcAlKMdHIko4Y7Xm56rVyDmR3PmAtnG', //secret
-            'admin' => 1
+            'user_id' => User::find(1)->first()->id,
+            'reference' => 'admin@gmail.com',
+            'intake' => 6,
+            'shift' => 0,
+            'university_id' => 1,
+            'current_job_designation' => 1,
+            'current_company' => 1,
+            'lives' => 'Dhaka',
         ];
     }
 
